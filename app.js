@@ -1,8 +1,7 @@
-document.addEventListener("DOMContentLoaded",async()=>{
-const products=await NTP.products(), services=await NTP.services();
-const grid=document.getElementById("featured-grid"); if(grid)grid.innerHTML=products.slice(0,6).map(card).join("");
-const social=document.getElementById("social-grid"); if(social)social.innerHTML=services.filter(x=>x.category==="digital").slice(0,6).map(serviceCard).join("");
-function card(p){return `<article class="product-card"><a href="product.html?id=${encodeURIComponent(p.id)}" class="product-thumb"><span>${p.image||"🎮"}</span>${p.tag?`<b class="tag">${NTP.esc(p.tag)}</b>`:""}</a><div class="product-body"><div class="product-meta"><span>${NTP.esc(p.game||"Game")}</span><span>${p.stock===0?"Hết hàng":"Còn hàng"}</span></div><h3><a href="product.html?id=${encodeURIComponent(p.id)}">${NTP.esc(p.name)}</a></h3><p>${NTP.esc(p.description||"")}</p><div class="price-row"><strong>${NTP.money(p.price)}</strong>${p.old_price?`<del>${NTP.money(p.old_price)}</del>`:""}</div><button class="btn btn-primary full add-cart" data-id="${NTP.esc(p.id)}">Thêm vào giỏ</button></div></article>`}
-function serviceCard(p){return `<article class="service-card"><div class="service-icon">${p.image||"⚡"}</div><div><div class="product-meta"><span>${NTP.esc(p.game)}</span><span>Từ</span></div><h3>${NTP.esc(p.name)}</h3><p>${NTP.esc(p.description||"")}</p><div class="price-row"><strong>${NTP.money(p.price)}</strong><button class="mini-add add-service" data-id="${NTP.esc(p.id)}">+</button></div></div></article>`}
-document.addEventListener("click",e=>{const b=e.target.closest(".add-cart,.add-service");if(!b)return;const all=[...products,...services],p=all.find(x=>x.id===b.dataset.id);if(p)NTP.addToCart(p)});
-});
+const KEY="ntpgame_cart";let cart=JSON.parse(localStorage.getItem(KEY)||"[]");
+function save(){localStorage.setItem(KEY,JSON.stringify(cart));updateCart()}
+function updateCart(){document.querySelectorAll("#cartCount").forEach(e=>e.textContent=cart.reduce((a,x)=>a+x.qty,0))}
+function addCart(name,price){let x=cart.find(i=>i.name===name);x?x.qty++:cart.push({name,price,qty:1});save();toast("Đã thêm vào giỏ hàng 🛒")}
+function toast(t){let e=document.createElement("div");e.className="toast";e.textContent=t;document.body.appendChild(e);setTimeout(()=>e.classList.add("show"),20);setTimeout(()=>{e.classList.remove("show");setTimeout(()=>e.remove(),250)},1800)}
+updateCart();
+document.querySelectorAll(".game-tabs button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".game-tabs button").forEach(x=>x.classList.remove("active"));b.classList.add("active");let g=b.dataset.game;document.querySelectorAll(".product").forEach(p=>p.style.display=g==="all"||p.dataset.game===g?"":"none")});

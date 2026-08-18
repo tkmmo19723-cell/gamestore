@@ -2,129 +2,66 @@
 <html lang="vi">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>NTPGame — Shop Acc Game & Dịch Vụ Cày Thuê</title>
-<meta name="description" content="NTPGame - shop acc game, dịch vụ cày thuê, hỗ trợ mạng xã hội và website. Giao dịch nhanh, quản lý đơn hàng tiện lợi.">
-<link rel="icon" href="assets/favicon.svg">
-<link rel="stylesheet" href="assets/style.css">
+<title>NTPGame — Shop Acc & Cày Thuê</title>
+<meta name="description" content="NTPGame — shop acc game, dịch vụ cày thuê và hỗ trợ 24/7.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="announcement"><span>⚡ Giao dịch nhanh</span><span>•</span><span>🛡️ Hỗ trợ 24/7</span><span>•</span><span>💳 Thanh toán VietQR</span></div>
+<div class="noise"></div>
 <header class="header">
-  <div class="container nav">
-    <a class="brand" href="index.html"><span class="brand-mark">N</span><span>NTP<span>GAME</span></span></a>
-    <button class="mobile-toggle" id="mobile-toggle">☰</button>
-    <nav id="main-nav">
-      <a class="active" href="index.html">Trang chủ</a>
-      <a href="shop.html">Acc Game</a>
-      <a href="services.html">Cày thuê</a>
-      <a href="index.html#social">MXH & Website</a>
-      <a href="orders.html">Đơn hàng</a>
-    </nav>
-    <div class="nav-actions">
-      <a class="icon-btn" href="cart.html" aria-label="Giỏ hàng">🛒<b id="cart-count">0</b></a>
-      <a class="account-btn" href="login.html" id="account-link">Đăng nhập</a>
-    </div>
-  </div>
+  <a class="brand" href="index.html"><span>NTP</span><b>GAME</b></a>
+  <nav>
+    <a href="#shop">Acc Game</a><a href="#services">Cày Thuê</a><a href="#features">Tiện ích</a><a href="orders.html">Đơn hàng</a>
+  </nav>
+  <div class="head-actions"><a class="login" href="login.html">Đăng nhập</a><a class="cart" href="cart.html">🛒 <i id="cartCount">0</i></a></div>
+  <button class="menu" onclick="document.body.classList.toggle('nav-open')">☰</button>
 </header>
 
 <main>
 <section class="hero">
-  <div class="container hero-inner">
-    <div class="hero-copy">
-      <div class="pill"><span class="dot"></span> NTPGAME • GIAO DỊCH NHANH • HỖ TRỢ 24/7</div>
-      <h1>SHOP <span>ACC GAME</span><br>& DỊCH VỤ <strong>CÀY THUÊ</strong></h1>
-      <p class="hero-text">Mua tài khoản game, đặt dịch vụ cày thuê và hỗ trợ mạng xã hội trong một nơi. Theo dõi đơn hàng, giỏ hàng và tài khoản ngay trên website.</p>
-      <div class="hero-actions">
-        <a class="btn btn-primary btn-lg" href="shop.html">Xem acc đang bán <span>→</span></a>
-        <a class="btn btn-outline btn-lg" href="services.html">Xem dịch vụ <span>↗</span></a>
-      </div>
-      <div class="hero-trust">
-        <div><b>5+</b><span>Danh mục</span></div>
-        <div><b>24/7</b><span>Hỗ trợ</span></div>
-        <div><b>100%</b><span>Quản lý đơn</span></div>
-      </div>
-    </div>
-    <div class="hero-visual">
-      <div class="orb orb-a"></div><div class="orb orb-b"></div>
-      <div class="showcase-card">
-        <div class="showcase-top"><span class="live"><i></i> ĐANG ONLINE</span><span>NTG • STORE</span></div>
-        <div class="showcase-icon">🎮</div>
-        <h3>Kho acc game & dịch vụ</h3>
-        <p>Free Fire • Liên Quân • ZingSpeed • Play Together • TFT</p>
-        <div class="showcase-row"><span>Giao dịch</span><b>NHANH</b></div>
-        <div class="showcase-row"><span>Hỗ trợ</span><b>24/7</b></div>
-        <div class="showcase-row"><span>Thanh toán</span><b>VIETQR</b></div>
-      </div>
-      <div class="float-card float-one">🔥 <b>Free Fire</b><small>Acc nổi bật</small></div>
-      <div class="float-card float-two">⚡ <b>Cày thuê</b><small>Nhận đơn nhanh</small></div>
-    </div>
+  <div class="hero-orb orb1"></div><div class="hero-orb orb2"></div>
+  <div class="hero-content">
+    <div class="badge"><span class="pulse"></span> GIAO DỊCH NHANH <em>•</em> HỖ TRỢ 24/7</div>
+    <h1>SHOP ACC GAME<br><span>& CÀY THUÊ</span></h1>
+    <p>Mua tài khoản game, đặt dịch vụ cày thuê và thanh toán nhanh. Trải nghiệm mua hàng hiện đại, minh bạch và dễ sử dụng.</p>
+    <div class="hero-buttons"><a class="btn primary" href="#shop">Xem acc đang bán <span>↗</span></a><a class="btn ghost" href="#services">Xem dịch vụ cày thuê</a></div>
+    <div class="trust"><span>⚡ Giao dịch nhanh</span><span>🛡️ Bảo mật</span><span>💬 Hỗ trợ 24/7</span></div>
+  </div>
+  <div class="hero-card">
+    <div class="card-glow"></div><div class="mini-top"><span>🔥 ACC NỔI BẬT</span><b>LIVE</b></div>
+    <div class="game-avatar">🎮</div><h3>Kho Acc Game</h3><p>Free Fire • Liên Quân • ZingSpeed • TFT</p>
+    <div class="price-row"><span>Từ</span><strong>29K</strong></div>
+    <a href="#shop" class="card-link">Khám phá kho acc →</a>
   </div>
 </section>
 
-<section class="category-strip">
-  <div class="container category-grid">
-    <a href="shop.html?game=Free%20Fire"><span>🔥</span><b>Free Fire</b><small>Acc game</small></a>
-    <a href="shop.html?game=Liên%20Quân"><span>⚔️</span><b>Liên Quân</b><small>Acc game</small></a>
-    <a href="shop.html?game=ZingSpeed"><span>🏎️</span><b>ZingSpeed</b><small>Acc game</small></a>
-    <a href="shop.html?game=Play%20Together"><span>🌳</span><b>Play Together</b><small>Acc game</small></a>
-    <a href="shop.html?game=TFT"><span>♟️</span><b>TFT</b><small>Acc game</small></a>
-    <a href="services.html"><span>📈</span><b>MXH & Web</b><small>Dịch vụ</small></a>
+<section class="stats" id="features">
+  <div><strong>5+</strong><span>Danh mục game</span></div><div><strong>24/7</strong><span>Hỗ trợ khách hàng</span></div><div><strong>100%</strong><span>Quản lý đơn hàng</span></div><div><strong>⚡</strong><span>Giao dịch nhanh</span></div>
+</section>
+
+<section class="section" id="shop">
+  <div class="section-head"><div><small>🎮 KHO TÀI KHOẢN</small><h2>Acc Game <span>nổi bật</span></h2><p>Chọn tài khoản phù hợp và thêm trực tiếp vào giỏ hàng.</p></div><a class="viewall" href="shop.html">Xem tất cả →</a></div>
+  <div class="game-tabs"><button class="active" data-game="all">Tất cả</button><button data-game="ff">🔥 Free Fire</button><button data-game="lq">⚔️ Liên Quân</button><button data-game="zs">🏎️ ZingSpeed</button><button data-game="tft">♟️ TFT</button></div>
+  <div class="products">
+    <article class="product" data-game="ff"><div class="thumb ff"><span>FREE FIRE</span><b>🔥</b></div><div class="product-body"><small>FREE FIRE • ACC #001</small><h3>Acc Free Fire VIP — Nhiều skin</h3><div class="meta"><span>⭐ VIP</span><span>✓ Chính chủ</span></div><div class="product-foot"><strong>299.000đ</strong><button onclick="addCart('Acc Free Fire VIP',299000)">Thêm giỏ</button></div></div></article>
+    <article class="product" data-game="lq"><div class="thumb lq"><span>LIÊN QUÂN</span><b>⚔️</b></div><div class="product-body"><small>LIÊN QUÂN • ACC #014</small><h3>Acc Liên Quân — Nhiều tướng</h3><div class="meta"><span>💎 Rank cao</span><span>✓ Uy tín</span></div><div class="product-foot"><strong>189.000đ</strong><button onclick="addCart('Acc Liên Quân',189000)">Thêm giỏ</button></div></div></article>
+    <article class="product" data-game="zs"><div class="thumb zs"><span>ZINGSPEED</span><b>🏎️</b></div><div class="product-body"><small>ZINGSPEED • ACC #008</small><h3>Acc ZingSpeed — Xe & đồ hiếm</h3><div class="meta"><span>🏆 Đã sưu tầm</span><span>✓ Có bảo hành</span></div><div class="product-foot"><strong>159.000đ</strong><button onclick="addCart('Acc ZingSpeed',159000)">Thêm giỏ</button></div></div></article>
   </div>
 </section>
 
-<section class="section" id="featured">
-  <div class="container">
-    <div class="section-heading"><div><div class="eyebrow">STORE</div><h2>Acc game nổi bật</h2><p>Những sản phẩm mới được cập nhật trong kho.</p></div><a class="text-link" href="shop.html">Xem tất cả →</a></div>
-    <div id="featured-grid" class="product-grid"></div>
+<section class="services-section" id="services">
+  <div class="section-head"><div><small>⚡ DỊCH VỤ NHANH</small><h2>Cày thuê <span>& hỗ trợ</span></h2><p>Đặt dịch vụ, theo dõi tiến độ và quản lý đơn ngay trên website.</p></div><a class="viewall" href="services.html">Tất cả dịch vụ →</a></div>
+  <div class="service-grid">
+    <a class="service" href="services.html"><i>🔥</i><div><h3>Free Fire</h3><p>Rank • Level • Nhiệm vụ</p></div><b>Từ 20K</b></a>
+    <a class="service" href="services.html"><i>⚔️</i><div><h3>Liên Quân</h3><p>Rank • Sao • Uy tín</p></div><b>Từ 15K</b></a>
+    <a class="service" href="services.html"><i>📱</i><div><h3>MXH & Website</h3><p>Hỗ trợ quản trị & tăng trưởng</p></div><b>Liên hệ</b></a>
   </div>
 </section>
 
-<section class="promo-section">
-  <div class="container promo">
-    <div><span class="eyebrow">DỊCH VỤ CÀY THUÊ</span><h2>Không có thời gian chơi?<br><span>Để NTPGame lo.</span></h2><p>Đặt đơn theo mục tiêu, thời gian và ngân sách. Theo dõi trạng thái ngay trên tài khoản.</p></div>
-    <a class="btn btn-primary" href="services.html">Đặt dịch vụ ngay →</a>
-  </div>
-</section>
-
-<section class="section" id="social">
-  <div class="container">
-    <div class="section-heading"><div><div class="eyebrow">DIGITAL SERVICES</div><h2>MXH & Website</h2><p>Danh mục hỗ trợ tăng trưởng và vận hành nền tảng số.</p></div></div>
-    <div class="service-grid" id="social-grid"></div>
-  </div>
-</section>
-
-<section class="section soft">
-  <div class="container">
-    <div class="section-heading centered"><div><div class="eyebrow">WHY NTPGAME</div><h2>Mua bán rõ ràng, quản lý dễ dàng</h2></div></div>
-    <div class="benefit-grid">
-      <div class="benefit"><span>🛡️</span><h3>Quản lý đơn hàng</h3><p>Mỗi đơn có mã riêng, trạng thái rõ ràng và lịch sử mua hàng.</p></div>
-      <div class="benefit"><span>⚡</span><h3>Phản hồi nhanh</h3><p>Giao diện tối ưu mobile, thao tác đặt hàng chỉ trong vài bước.</p></div>
-      <div class="benefit"><span>🔐</span><h3>Tài khoản an toàn</h3><p>Đăng nhập bằng Supabase Auth, phân quyền admin và RLS cho dữ liệu.</p></div>
-      <div class="benefit"><span>💬</span><h3>Hỗ trợ 24/7</h3><p>Liên hệ hỗ trợ khi cần kiểm tra đơn hoặc xử lý vấn đề phát sinh.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="faq-section">
-  <div class="container faq-wrap">
-    <div><div class="eyebrow">FAQ</div><h2>Câu hỏi thường gặp</h2><p class="muted">Một vài thông tin giúp bạn mua hàng nhanh hơn.</p></div>
-    <div class="faq-list">
-      <details><summary>Website có cần đăng ký tài khoản không?</summary><p>Bạn có thể xem sản phẩm không cần đăng nhập. Khi tạo đơn, hệ thống yêu cầu đăng nhập để lưu và theo dõi đơn hàng.</p></details>
-      <details><summary>Đơn cày thuê được xử lý thế nào?</summary><p>Bạn chọn dịch vụ, điền thông tin cần thiết, gửi đơn. Admin/nhân viên cập nhật trạng thái xử lý trong hệ thống.</p></details>
-      <details><summary>Thông tin tài khoản game được giao khi nào?</summary><p>Thông tin sản phẩm có thể được hiển thị sau khi đơn được xác nhận theo cấu hình của shop.</p></details>
-    </div>
-  </div>
-</section>
+<section class="cta"><div><small>🚀 SẴN SÀNG GIAO DỊCH</small><h2>Bắt đầu mua sắm<br><span>ngay hôm nay.</span></h2></div><a class="btn primary" href="shop.html">Vào Shop ngay →</a></section>
 </main>
-
-<footer class="footer">
-  <div class="container footer-grid">
-    <div><a class="brand" href="index.html"><span class="brand-mark">N</span><span>NTP<span>GAME</span></span></a><p>Shop acc game & dịch vụ cày thuê.</p></div>
-    <div><h4>Điều hướng</h4><a href="shop.html">Acc Game</a><a href="services.html">Cày thuê</a><a href="orders.html">Đơn hàng</a></div>
-    <div><h4>Hỗ trợ</h4><a href="login.html">Tài khoản</a><a href="cart.html">Giỏ hàng</a><a href="index.html#social">MXH & Website</a></div>
-    <div><h4>Thanh toán</h4><p>VietQR • Chuyển khoản</p><p class="muted">© 2026 NTPGame</p></div>
-  </div>
-</footer>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="assets/config.js"></script><script src="assets/app.js"></script>
+<footer><div class="brand"><span>NTP</span><b>GAME</b></div><p>© 2026 NTPGame. Shop acc & dịch vụ game.</p><div><a href="login.html">Tài khoản</a><a href="orders.html">Đơn hàng</a><a href="admin.html">Admin</a></div></footer>
+<script src="app.js"></script>
 </body></html>

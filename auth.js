@@ -1,0 +1,5 @@
+document.addEventListener("DOMContentLoaded",()=>{
+const login=document.getElementById("login-form"), reg=document.getElementById("register-form"), msg=document.getElementById("auth-message");
+if(login)login.onsubmit=async e=>{e.preventDefault();if(!window.ntpSupabase){msg.textContent="Bạn chưa cấu hình Supabase trong assets/config.js";return}const {error}=await ntpSupabase.auth.signInWithPassword({email:email.value,password:password.value});if(error){msg.textContent=error.message;return}location.href=new URLSearchParams(location.search).get("next")||"index.html"};
+if(reg)reg.onsubmit=async e=>{e.preventDefault();if(!window.ntpSupabase){msg.textContent="Bạn chưa cấu hình Supabase trong assets/config.js";return}const {data,error}=await ntpSupabase.auth.signUp({email:email.value,password:password.value,options:{data:{display_name:name.value}}});if(error){msg.textContent=error.message;return}msg.textContent=data.session?"Đăng ký thành công!":"Đăng ký thành công. Kiểm tra email để xác nhận tài khoản.";setTimeout(()=>location.href="login.html",1200)};
+});

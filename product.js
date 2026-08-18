@@ -1,0 +1,6 @@
+document.addEventListener("DOMContentLoaded",async()=>{
+const id=new URLSearchParams(location.search).get("id"), all=[...(await NTP.products()),...(await NTP.services())], p=all.find(x=>x.id===id), el=document.getElementById("product-detail");
+if(!p){el.innerHTML='<div class="empty">Không tìm thấy sản phẩm.</div>';return}
+el.innerHTML=`<div class="detail-media"><div class="detail-icon">${p.image||"🎮"}</div><span class="pill">✓ Sản phẩm đang bán</span></div><div class="detail-copy"><div class="eyebrow">${NTP.esc(p.category==="account"?"ACC GAME":"DỊCH VỤ")}</div><div class="product-meta"><span>${NTP.esc(p.game)}</span><span>${p.stock===0?"Hết hàng":"Còn hàng"}</span></div><h1>${NTP.esc(p.name)}</h1><p class="detail-description">${NTP.esc(p.description||"Thông tin sản phẩm đang được cập nhật.")}</p><div class="detail-price">${NTP.money(p.price)} ${p.old_price?`<del>${NTP.money(p.old_price)}</del>`:""}</div><ul class="check-list"><li>✓ Thông tin sản phẩm rõ ràng</li><li>✓ Quản lý đơn hàng sau khi mua</li><li>✓ Hỗ trợ xử lý đơn</li></ul><button class="btn btn-primary btn-lg" id="add-detail">Thêm vào giỏ hàng</button></div>`;
+document.getElementById("add-detail").onclick=()=>NTP.addToCart(p);
+});

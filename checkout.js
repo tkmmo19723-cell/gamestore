@@ -1,0 +1,11 @@
+document.addEventListener("DOMContentLoaded",async()=>{
+const c=NTP.getCart(), form=document.getElementById("checkout-form"), sum=document.getElementById("checkout-summary");
+if(!c.length){location.href="cart.html";return}
+const total=c.reduce((s,x)=>s+x.price*x.qty,0);sum.innerHTML=`<h3>Đơn hàng</h3>${c.map(x=>`<div class="summary-product"><span>${NTP.esc(x.name)} × ${x.qty}</span><b>${NTP.money(x.price*x.qty)}</b></div>`).join("")}<hr><div class="summary-total"><span>Tổng</span><b>${NTP.money(total)}</b></div>`;
+const u=await NTP.user();
+if(!u){form.innerHTML=`<div class="notice"><div class="notice-icon">🔐</div><div><h3>Cần đăng nhập</h3><p>Đăng nhập để tạo và theo dõi đơn hàng.</p><a class="btn btn-primary" href="login.html?next=checkout.html">Đăng nhập</a></div></div>`;return}
+form.innerHTML=`<form id="place-order"><label>Họ tên<input id="customer-name" required value="${NTP.esc(u.user_metadata?.display_name||"")}"></label><label>Số điện thoại<input id="phone" required placeholder="09xxxxxxxx"></label><label>Ghi chú<textarea id="note" rows="5" placeholder="Thông tin rank, mục tiêu, yêu cầu giao dịch..."></textarea></label><div class="payment-choice"><b>Phương thức</b><label><input type="radio" checked> VietQR / Chuyển khoản</label><p class="muted small">Thông tin thanh toán có thể cấu hình trong Supabase / trang quản trị.</p></div><button class="btn btn-primary btn-lg full" type="submit">Tạo đơn ${NTP.money(total)}</button><div id="checkout-msg" class="form-message"></div></form>`;
+document.getElementById("place-order").onsubmit=async e=>{e.preventDefault();const msg=document.getElementById("checkout-msg");if(!window.ntpSupabase){msg.textContent="Demo: hãy cấu hình Supabase để tạo đơn thật.";return}
+const items=c.map(x=>({product_id:x.id,quantity:x.qty}));const {data,error}=await ntpSupabase.rpc("create_order",{p_items:items,p_note:document.getElementById("note").value,p_phone:document.getElementById("phone").value,p_customer_name:document.getElementById("customer-name").value});
+if(error){msg.textContent=error.message;return}NTP.clearCart();location.href="orders.html?created="+encodeURIComponent(data)};
+});

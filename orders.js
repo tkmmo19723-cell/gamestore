@@ -1,0 +1,7 @@
+document.addEventListener("DOMContentLoaded",async()=>{
+const el=document.getElementById("orders-page"),u=await NTP.user();if(!u){el.innerHTML='<div class="empty-card"><div>🔐</div><h2>Bạn chưa đăng nhập</h2><p>Đăng nhập để xem lịch sử đơn hàng.</p><a class="btn btn-primary" href="login.html?next=orders.html">Đăng nhập</a></div>';return}
+const {data,error}=await ntpSupabase.from("orders").select("*,order_items(*,products(name,game,price))").eq("user_id",u.id).order("created_at",{ascending:false});
+if(error){el.innerHTML=`<div class="empty">${NTP.esc(error.message)}</div>`;return}
+if(!data?.length){el.innerHTML='<div class="empty-card"><div>📦</div><h2>Chưa có đơn hàng</h2><p>Đơn hàng của bạn sẽ xuất hiện tại đây.</p><a class="btn btn-primary" href="shop.html">Mua sắm ngay</a></div>';return}
+el.innerHTML=`<div class="orders-list">${data.map(o=>`<article class="order-card"><div class="order-head"><div><span class="muted small">MÃ ĐƠN</span><h3>${NTP.esc(o.order_code)}</h3><span class="muted">${new Date(o.created_at).toLocaleString("vi-VN")}</span></div><span class="status status-${o.status}">${NTP.esc(o.status)}</span></div><div class="order-items">${(o.order_items||[]).map(i=>`<div><span>${NTP.esc(i.products?.name||"Sản phẩm")} × ${i.quantity}</span><b>${NTP.money(i.unit_price*i.quantity)}</b></div>`).join("")}</div><div class="order-total"><span>Tổng đơn</span><b>${NTP.money(o.total_amount)}</b></div>${o.delivery_note?`<div class="delivery">🔑 <b>Thông tin giao:</b><pre>${NTP.esc(o.delivery_note)}</pre></div>`:""}</article>`).join("")}</div>`;
+});

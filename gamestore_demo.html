@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GameStore VN - Tài khoản game</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f5f7fb;color:#172033}
+header{background:#111827;color:white;padding:18px 6%;display:flex;align-items:center;justify-content:space-between;gap:20px;position:sticky;top:0;z-index:5}
+.logo{font-size:22px;font-weight:800}.logo span{color:#60a5fa}
+nav a{color:#dbeafe;text-decoration:none;margin:0 8px;font-size:14px}
+.hero{padding:55px 6%;background:linear-gradient(120deg,#111827,#2563eb);color:white}
+.hero h1{font-size:40px;margin:0 0 12px}.hero p{max-width:650px;color:#dbeafe}
+.container{padding:28px 6%}.tabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px}
+.tab{border:0;background:white;padding:11px 18px;border-radius:999px;cursor:pointer;box-shadow:0 2px 8px #00000010}.tab.active{background:#2563eb;color:white}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.card{background:white;border-radius:16px;overflow:hidden;box-shadow:0 4px 16px #00000012}
+.thumb{height:145px;background:linear-gradient(135deg,#dbeafe,#bfdbfe);display:flex;align-items:center;justify-content:center;font-size:48px}
+.info{padding:16px}.game{font-size:12px;color:#2563eb;font-weight:bold}.title{font-weight:700;margin:7px 0}.price{font-size:20px;font-weight:800}.btn{width:100%;border:0;background:#2563eb;color:white;padding:11px;border-radius:10px;cursor:pointer;margin-top:12px}
+.cart{position:fixed;right:20px;bottom:20px;background:#111827;color:white;padding:14px 18px;border-radius:999px;box-shadow:0 8px 25px #0003;cursor:pointer}
+footer{text-align:center;padding:30px;color:#6b7280;font-size:13px}
+.modal{display:none;position:fixed;inset:0;background:#0008;align-items:center;justify-content:center;z-index:10}.modal.show{display:flex}
+.box{background:white;border-radius:18px;padding:24px;max-width:420px;width:90%}.close{float:right;border:0;background:none;font-size:22px;cursor:pointer}
+.note{font-size:12px;color:#6b7280;margin-top:12px}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">GameStore <span>VN</span></div>
+  <nav><a href="#">Trang chủ</a><a href="#sanpham">Sản phẩm</a><a href="#lienhe">Liên hệ</a></nav>
+</header>
+
+<section class="hero">
+  <h1>Kho tài khoản game</h1>
+  <p>Website mẫu bán tài khoản game — giao diện demo cho Free Fire, Liên Quân, PUBG Mobile và Roblox.</p>
+</section>
+
+<main class="container" id="sanpham">
+  <div class="tabs">
+    <button class="tab active" onclick="filterGame('all',this)">Tất cả</button>
+    <button class="tab" onclick="filterGame('Free Fire',this)">🔥 Free Fire</button>
+    <button class="tab" onclick="filterGame('Liên Quân',this)">⚔️ Liên Quân</button>
+    <button class="tab" onclick="filterGame('PUBG Mobile',this)">🎯 PUBG Mobile</button>
+    <button class="tab" onclick="filterGame('Roblox',this)">🧱 Roblox</button>
+  </div>
+  <div class="grid" id="products"></div>
+</main>
+
+<div class="cart" onclick="openCart()">🛒 Giỏ hàng: <b id="count">0</b></div>
+
+<div class="modal" id="modal">
+  <div class="box">
+    <button class="close" onclick="closeModal()">×</button>
+    <h2>Giỏ hàng</h2>
+    <div id="cartItems"></div>
+    <hr>
+    <b>Tổng: <span id="total">0đ</span></b>
+    <button class="btn" onclick="alert('Đây là giao diện demo. Chưa kết nối thanh toán.')">Tiến hành thanh toán</button>
+    <div class="note">Demo chưa xử lý thanh toán thật và chưa giao tài khoản tự động.</div>
+  </div>
+</div>
+
+<footer id="lienhe">© 2026 GameStore VN · Website mẫu</footer>
+
+<script>
+const products=[
+ {game:"Free Fire",icon:"🔥",title:"Nick FF VIP #001",price:150000},
+ {game:"Free Fire",icon:"🔥",title:"Nick FF nhiều skin #002",price:250000},
+ {game:"Liên Quân",icon:"⚔️",title:"Nick LQ Rank Cao #101",price:300000},
+ {game:"Liên Quân",icon:"⚔️",title:"Nick LQ nhiều tướng #102",price:450000},
+ {game:"PUBG Mobile",icon:"🎯",title:"Nick PUBG nhiều skin #201",price:500000},
+ {game:"PUBG Mobile",icon:"🎯",title:"Nick PUBG Rank #202",price:650000},
+ {game:"Roblox",icon:"🧱",title:"Tài khoản Roblox #301",price:100000},
+ {game:"Roblox",icon:"🧱",title:"Tài khoản Roblox VIP #302",price:200000}
+];
+let cart=[];
+function money(n){return n.toLocaleString('vi-VN')+'đ'}
+function render(list=products){
+ const el=document.getElementById('products');
+ el.innerHTML=list.map((p,i)=>`<article class="card">
+ <div class="thumb">${p.icon}</div><div class="info">
+ <div class="game">${p.game}</div><div class="title">${p.title}</div>
+ <div class="price">${money(p.price)}</div>
+ <button class="btn" onclick="add(${i})">Thêm vào giỏ</button>
+ </div></article>`).join('');
+}
+function filterGame(game,btn){
+ document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));btn.classList.add('active');
+ render(game==='all'?products:products.filter(p=>p.game===game));
+}
+function add(i){cart.push(products[i]);document.getElementById('count').textContent=cart.length}
+function openCart(){
+ document.getElementById('modal').classList.add('show');
+ const list=document.getElementById('cartItems');
+ list.innerHTML=cart.length?cart.map((p,i)=>`<p>${p.title} — <b>${money(p.price)}</b> <button onclick="removeItem(${i})">Xóa</button></p>`).join(''):'<p>Giỏ hàng đang trống.</p>';
+ document.getElementById('total').textContent=money(cart.reduce((s,p)=>s+p.price,0));
+}
+function removeItem(i){cart.splice(i,1);document.getElementById('count').textContent=cart.length;openCart()}
+function closeModal(){document.getElementById('modal').classList.remove('show')}
+render();
+</script>
+</body>
+</html>
